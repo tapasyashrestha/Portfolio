@@ -903,17 +903,29 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 900px;
-  margin: 32px auto 0;
-  padding: 24px 16px 0;
+  max-width: 90%;
+  margin: 8px auto 0;
+  padding: 4px 16px 0;
   gap: 16px;
-  border-top: 1px solid var(--border);
 }
 
 @media (min-width: 768px) {
   .hero-details-row {
     flex-direction: row;
     gap: 0;
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-details-row {
+    max-width: 780px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-details-row {
+    max-width: 920px;
   }
 }
 
