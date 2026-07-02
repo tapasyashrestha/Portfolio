@@ -82,8 +82,8 @@ export default function BandCard() {
           dpr={[1, 2]}
           camera={{
             position: isMobile
-              ? [0, -0.6, 7.5]
-              : [0, -0.95, 5.5],
+              ? [0, -0.85, 7.8]
+              : [0, -1.2, 5.8],
             fov: isMobile ? 32 : 25,
           }}
           style={{
