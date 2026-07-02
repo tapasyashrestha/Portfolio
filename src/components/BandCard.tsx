@@ -74,8 +74,8 @@ export default function BandCard() {
           dpr={[1, 2]}
           camera={{
             position: isMobile
-              ? [0, 0, 15]
-              : [0, 0, 13],
+              ? [0, 0, 11]
+              : [0, 0, 8.8],
             fov: isMobile ? 32 : 25,
           }}
           style={{
@@ -375,8 +375,8 @@ function Band({
       <group
         position={
           isMobile
-            ? [1.2, 3, 0]
-            : [3, 4, 0]
+            ? [0, 2.7, 0]
+            : [0, 3.2, 0]
         }
       >
         <RigidBody
