@@ -1037,7 +1037,7 @@ a {
 
 .hero-floating-card-container {
   position: fixed;
-  bottom: 96px;
+  top: 90px;
   right: 24px;
   width: 320px;
   height: 480px;
@@ -1052,6 +1052,16 @@ a {
   flex-direction: column;
   overflow: hidden;
   transition: border-color 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .hero-floating-card-container {
+    right: 16px;
+    left: 16px;
+    width: auto;
+    top: 90px;
+    height: 440px;
+  }
 }
 
 .hero-floating-card-container:hover {
