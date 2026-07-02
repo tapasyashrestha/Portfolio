@@ -218,8 +218,14 @@ function Band({
       const imgX = (canvas.width - imgWidth) / 2;
       const imgY = 60;
 
-      // Draw photo
-      ctx.drawImage(img, imgX, imgY, imgWidth, imgHeight);
+      // Calculate crop coordinates to center face (she is in the upper right quadrant)
+      const cropWidth = img.width * 0.55; 
+      const cropHeight = cropWidth * (440 / 360); 
+      const sx = img.width * 0.42; 
+      const sy = img.height * 0.18;
+
+      // Draw photo cropped to focus on face/shoulders
+      ctx.drawImage(img, sx, sy, cropWidth, cropHeight, imgX, imgY, imgWidth, imgHeight);
 
       // Draw photo border
       ctx.strokeStyle = "#cbd5e1";
