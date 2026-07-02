@@ -1,15 +1,15 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  Phone, 
-  Menu, 
-  X, 
-  Code, 
-  BrainCircuit, 
-  Server, 
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  Menu,
+  X,
+  Code,
+  BrainCircuit,
+  Server,
   Database,
   GraduationCap
 } from 'lucide-react';
@@ -67,12 +67,12 @@ export default function App() {
       {/* Navigation Header */}
       <header className="header">
         <div className="container header-container">
-          <div 
-            onClick={() => scrollTo('home')} 
-            className="logo" 
+          <div
+            onClick={() => scrollTo('home')}
+            className="logo"
             style={{ cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}
           >
-            <span style={{ fontWeight: 300, fontSize: '18px' }}>&larr;</span> tap<span>.</span>
+            <span style={{ fontWeight: 300, fontSize: '18px' }}>&larr;</span> Tapasya<span>.</span>
           </div>
 
           <nav className="nav-links">
@@ -91,16 +91,16 @@ export default function App() {
               </a>
             ))}
             <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--muted)', margin: '0 4px', textDecoration: 'underline' }}>EN</span>
-            <a 
-              href="mailto:tapasyashrestha9@gmail.com" 
+            <a
+              href="mailto:tapasyashrestha9@gmail.com"
               className="btn-header-email"
             >
               tapasyashrestha9@gmail.com
             </a>
           </nav>
 
-          <button 
-            className="mobile-menu-btn" 
+          <button
+            className="mobile-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -126,8 +126,8 @@ export default function App() {
               {item}
             </a>
           ))}
-          <a 
-            href="mailto:tapasyashrestha9@gmail.com" 
+          <a
+            href="mailto:tapasyashrestha9@gmail.com"
             className="btn-primary"
             style={{ width: '100%', marginTop: '8px', fontSize: '12px' }}
           >
@@ -140,18 +140,18 @@ export default function App() {
       <section id="home" className="hero-section">
         <div className="container">
           <div className="hero-content-centered">
-            
+
             <div className="hero-subtitle-centered">
-              <span>👋, my name is Tapasya and I am a freelance</span>
+              <span>Hello, my name is Tapasya and I am a</span>
             </div>
 
             <div className="hero-stack-container">
               <h1 className="hero-text-row text-solid">FULLSTACK</h1>
-              
+
               <div className="hero-avatar-wrapper">
-                <img 
-                  src="/avatar.png" 
-                  alt="Tapasya Shrestha" 
+                <img
+                  src="/avatar.png"
+                  alt="Tapasya Shrestha"
                   className="hero-avatar-img"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/avatar.jpg';
@@ -165,7 +165,7 @@ export default function App() {
 
             <div className="hero-details-row">
               <div className="hero-details-location">
-                based in Jaipur, India.
+                3rd Year Student
               </div>
               <div className="hero-details-logos">
                 <span className="tech-logo">React</span>
@@ -182,10 +182,10 @@ export default function App() {
 
             <div className="hero-actions-centered">
               <button onClick={() => scrollTo('projects')} className="btn-primary-pill">
-                You need a developer
+                See my work
               </button>
               <button onClick={() => scrollTo('contact')} className="btn-secondary-pill">
-                You need an AI/ML engineer
+                Hire me
               </button>
             </div>
 
@@ -196,36 +196,58 @@ export default function App() {
       {/* INTRO/SHOWCASE SECTION (Prince-style light theme) */}
       <section id="intro" className="intro-section-light">
         <div className="container intro-container-light">
-          <div className="intro-available-tag">
-            <span className="sparkle-icon">✦</span>
-            <span className="tag-text">AVAILABLE FOR WORK</span>
-            <span className="cursor-blink">|</span>
-          </div>
+          <div className="intro-content-wrapper">
+            <div className="intro-left-col">
+              <div className="intro-available-tag">
+                <span className="sparkle-icon">✦</span>
+                <span className="tag-text">AVAILABLE FOR WORK</span>
+                <span className="cursor-blink">|</span>
+              </div>
 
-          <div className="intro-title-group">
-            <h1 className="intro-title-black">Fullstack</h1>
-            <h1 className="intro-title-gray">AI/ML Engineer</h1>
-          </div>
+              <div className="intro-title-group">
+                <h1 className="intro-title-black">Fullstack</h1>
+                <h1 className="intro-title-gray">AI/ML Engineer</h1>
+              </div>
 
-          <p className="intro-desc">
-            Building intelligent, full-stack applications with clean, responsive, and elegant interfaces.
-            Turning machine learning algorithms and designs into engaging digital experiences.
-          </p>
+              <p className="intro-desc">
+                Building intelligent, full-stack applications with clean, responsive, and elegant interfaces.
+                Turning machine learning algorithms and designs into engaging digital experiences.
+              </p>
 
-          <div className="intro-badges">
-            <span className="badge-light-pill">React.js</span>
-            <span className="badge-light-pill">TypeScript</span>
-            <span className="badge-light-pill">Python</span>
-            <span className="badge-light-pill">PyTorch</span>
-          </div>
+              <div className="intro-badges">
+                <span className="badge-light-pill">React.js</span>
+                <span className="badge-light-pill">TypeScript</span>
+                <span className="badge-light-pill">Python</span>
+                <span className="badge-light-pill">PyTorch</span>
+              </div>
 
-          <div className="intro-actions">
-            <button onClick={() => setShowCard(!showCard)} className="btn-accent-outline-light">
-              {showCard ? "HIDE CARD" : "SHOW CARD"}
-            </button>
-            <button onClick={() => scrollTo('about')} className="btn-solid-light">
-              ABOUT ME
-            </button>
+              <div className="intro-actions">
+                <button onClick={() => setShowCard(!showCard)} className="btn-accent-outline-light">
+                  {showCard ? "HIDE CARD" : "SHOW CARD"}
+                </button>
+                <button onClick={() => scrollTo('about')} className="btn-solid-light">
+                  ABOUT ME
+                </button>
+              </div>
+            </div>
+
+            <div className="intro-right-col">
+              <AnimatePresence>
+                {showCard && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: -40 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -40 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="intro-card-canvas-container"
+                  >
+                    <Suspense fallback={<div className="loading-spinner-inline">Loading 3D Card...</div>}>
+                      <BandCard />
+                    </Suspense>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </section>
@@ -458,29 +480,7 @@ export default function App() {
 
 
 
-      {/* 3D ID Card Floating */}
-      <AnimatePresence>
-        {showCard && (
-          <motion.div
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -100, opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="hero-floating-card-container"
-          >
-            <div className="hero-floating-card-header">
-              <span className="card-header-dot"></span>
-              <span className="card-header-title">3D Interactive ID Card</span>
-              <button className="card-close-btn" onClick={() => setShowCard(false)}>&times;</button>
-            </div>
-            <div className="hero-floating-card-body">
-              <Suspense fallback={<div className="loading-spinner">Loading 3D Card...</div>}>
-                <BandCard />
-              </Suspense>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
     </div>
   );
 }
