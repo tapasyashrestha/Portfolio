@@ -192,6 +192,62 @@ function Band({
     (state) => state.size
   );
 
+  const [cardTexture, setCardTexture] = useState<THREE.CanvasTexture | null>(null);
+
+  useEffect(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 512;
+    canvas.height = 728;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Fill background
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw border
+    ctx.strokeStyle = "#cbd5e1";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(2, 2, canvas.width - 4, canvas.height - 4);
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const imgWidth = 360;
+      const imgHeight = 440;
+      const imgX = (canvas.width - imgWidth) / 2;
+      const imgY = 60;
+
+      // Draw photo
+      ctx.drawImage(img, imgX, imgY, imgWidth, imgHeight);
+
+      // Draw photo border
+      ctx.strokeStyle = "#cbd5e1";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(imgX - 1, imgY - 1, imgWidth + 2, imgHeight + 2);
+
+      // Draw name text
+      ctx.fillStyle = "#000000";
+      ctx.textAlign = "center";
+      ctx.font = 'italic 34px "Brush Script MT", "Georgia", cursive';
+      ctx.fillText("Name - Tapasya Shrestha", canvas.width / 2, 610);
+
+      // Create texture
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.flipY = false;
+      setCardTexture(tex);
+    };
+
+    img.onerror = () => {
+      if (img.src.endsWith(".png")) {
+        img.src = "/avatar.jpg";
+      }
+    };
+
+    img.src = "/avatar.png";
+  }, []);
+
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([
@@ -479,6 +535,7 @@ function Band({
               >
                 <meshPhysicalMaterial
                   {...materials.base}
+                  map={cardTexture || materials.base.map}
                   roughness={0.35}
                   metalness={0.1}
                   clearcoat={1}
