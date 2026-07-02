@@ -814,10 +814,10 @@ a {
 
 .hero-text-row {
   font-family: var(--font-heading);
-  font-size: 8.5vw;
+  font-size: 9.5vw;
   line-height: 0.9;
   font-weight: 900;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   margin: 0;
   z-index: 1;
@@ -827,19 +827,19 @@ a {
 
 @media (min-width: 768px) {
   .hero-text-row {
-    font-size: 5.2rem;
+    font-size: 6rem;
   }
 }
 
 @media (min-width: 1024px) {
   .hero-text-row {
-    font-size: 6.8rem;
+    font-size: 7.8rem;
   }
 }
 
 @media (min-width: 1200px) {
   .hero-text-row {
-    font-size: 8rem;
+    font-size: 9.2rem;
   }
 }
 
