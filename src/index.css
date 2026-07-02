@@ -814,7 +814,7 @@ a {
 
 .hero-text-row {
   font-family: var(--font-heading);
-  font-size: 5.8vw;
+  font-size: 8.5vw;
   line-height: 0.9;
   font-weight: 900;
   letter-spacing: -0.04em;
@@ -827,19 +827,19 @@ a {
 
 @media (min-width: 768px) {
   .hero-text-row {
-    font-size: 4.5rem;
+    font-size: 5.2rem;
   }
 }
 
 @media (min-width: 1024px) {
   .hero-text-row {
-    font-size: 5.8rem;
+    font-size: 6.8rem;
   }
 }
 
 @media (min-width: 1200px) {
   .hero-text-row {
-    font-size: 7rem;
+    font-size: 8rem;
   }
 }
 
@@ -854,7 +854,7 @@ a {
 
 .hero-avatar-wrapper {
   position: absolute;
-  top: 62%;
+  top: 68%;
   left: 50%;
   transform: translate(-50%, -35%);
   width: 200px;

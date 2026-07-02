@@ -159,7 +159,8 @@ export default function App() {
                 />
               </div>
 
-              <h1 className="hero-text-row text-outline">&amp; AI/ML ENGINEER</h1>
+              <h1 className="hero-text-row text-outline">&amp; AI/ML</h1>
+              <h1 className="hero-text-row text-outline">ENGINEER</h1>
             </div>
 
             <div className="hero-details-row">
