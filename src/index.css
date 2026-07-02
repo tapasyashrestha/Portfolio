@@ -1135,7 +1135,6 @@ a {
   align-items: flex-start;
   text-align: left;
   width: 100%;
-  max-width: 900px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -1177,7 +1176,7 @@ a {
 
 .intro-title-black {
   font-family: var(--font-heading);
-  font-size: 13vw;
+  font-size: 10vw;
   line-height: 0.95;
   font-weight: 900;
   letter-spacing: -0.04em;
@@ -1188,7 +1187,7 @@ a {
 
 .intro-title-gray {
   font-family: var(--font-heading);
-  font-size: 13vw;
+  font-size: 10vw;
   line-height: 0.95;
   font-weight: 900;
   letter-spacing: -0.04em;
@@ -1199,13 +1198,13 @@ a {
 
 @media (min-width: 768px) {
   .intro-title-black, .intro-title-gray {
-    font-size: 6.5rem;
+    font-size: 5.2rem;
   }
 }
 
 @media (min-width: 1024px) {
   .intro-title-black, .intro-title-gray {
-    font-size: 8rem;
+    font-size: 6.8rem;
   }
 }
 
