@@ -12,9 +12,7 @@ import {
   Server, 
   Database,
   GraduationCap,
-  Sparkles,
-  Sun,
-  Moon
+  Sparkles
 } from 'lucide-react';
 
 const BandCard = lazy(() => import('./components/BandCard'));
@@ -23,28 +21,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showCard, setShowCard] = useState(true);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [timeStr, setTimeStr] = useState('');
 
-  // Live dynamic clock for dark mode
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTimeStr(now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000); // update every second
-    return () => clearInterval(interval);
-  }, []);
-
-  // Update body class when theme changes
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-  }, [theme]);
 
   // Monitor scrolling to highlight navigation links
   useEffect(() => {
@@ -89,80 +66,44 @@ export default function App() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Navigation Header */}
-      <header className={`header ${theme === 'dark' ? 'header-dark' : ''}`}>
+      <header className="header">
         <div className="container header-container">
-          {theme === 'dark' ? (
-            <div 
-              onClick={() => scrollTo('home')} 
-              className="logo-dark-mode" 
-              style={{ cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}
-            >
-              <div className="logo-initial-badge">T</div>
-              <span className="logo-name-dark">TAPASYA</span>
-              <span className="logo-dot-dark">&middot;</span>
-              <span className="logo-title-dark">ENGINEER</span>
-            </div>
-          ) : (
-            <div 
-              onClick={() => scrollTo('home')} 
-              className="logo" 
-              style={{ cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}
-            >
-              <span style={{ fontWeight: 300, fontSize: '18px' }}>&larr;</span> tap<span>.</span>
-            </div>
-          )}
+          <div 
+            onClick={() => scrollTo('home')} 
+            className="logo" 
+            style={{ cursor: 'pointer', userSelect: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            <span style={{ fontWeight: 300, fontSize: '18px' }}>&larr;</span> tap<span>.</span>
+          </div>
 
           <nav className="nav-links">
-            {theme === 'dark' ? (
-              <>
-                <a href="#home" onClick={(e) => { e.preventDefault(); scrollTo('home'); }} className={`nav-link-dark ${activeSection === 'home' ? 'active' : ''}`}>HOME</a>
-                <a href="#about" onClick={(e) => { e.preventDefault(); scrollTo('about'); }} className={`nav-link-dark ${activeSection === 'about' ? 'active' : ''}`}>ABOUT</a>
-                <a href="#projects" onClick={(e) => { e.preventDefault(); scrollTo('projects'); }} className={`nav-link-dark ${activeSection === 'projects' ? 'active' : ''}`}>SHOWCASE</a>
-                <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('contact'); }} className={`nav-link-dark ${activeSection === 'contact' ? 'active' : ''}`}>CONTACT</a>
-                <span className="time-display-dark">{timeStr}</span>
-              </>
-            ) : (
-              <>
-                {navItems.map((item) => (
-                  <a
-                    key={item}
-                    href={`#${item}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollTo(item);
-                    }}
-                    className={`nav-link ${activeSection === item ? 'active' : ''}`}
-                    style={{ textTransform: 'capitalize' }}
-                  >
-                    {item}
-                  </a>
-                ))}
-                <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--muted)', margin: '0 4px', textDecoration: 'underline' }}>EN</span>
-                <a 
-                  href="mailto:tapasyashrestha9@gmail.com" 
-                  className="btn-header-email"
-                >
-                  tapasyashrestha9@gmail.com
-                </a>
-              </>
-            )}
-
-            {/* Theme Toggle Button */}
-            <button 
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} 
-              className={`btn-theme-toggle ${theme === 'dark' ? 'btn-theme-toggle-dark' : ''}`}
-              title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
-              aria-label="Toggle theme"
+            {navItems.map((item) => (
+              <a
+                key={item}
+                href={`#${item}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollTo(item);
+                }}
+                className={`nav-link ${activeSection === item ? 'active' : ''}`}
+                style={{ textTransform: 'capitalize' }}
+              >
+                {item}
+              </a>
+            ))}
+            <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--muted)', margin: '0 4px', textDecoration: 'underline' }}>EN</span>
+            <a 
+              href="mailto:tapasyashrestha9@gmail.com" 
+              className="btn-header-email"
             >
-              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
+              tapasyashrestha9@gmail.com
+            </a>
           </nav>
 
           <button 
             className="mobile-menu-btn" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
-            style={{ color: theme === 'dark' ? '#ffffff' : 'var(--foreground)' }}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -171,150 +112,124 @@ export default function App() {
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <nav className={`mobile-nav ${theme === 'dark' ? 'mobile-nav-dark' : ''}`}>
-          {theme === 'dark' ? (
-            <>
-              <a href="#home" onClick={(e) => { e.preventDefault(); scrollTo('home'); setMobileMenuOpen(false); }} className={`nav-link ${activeSection === 'home' ? 'active' : ''}`}>HOME</a>
-              <a href="#about" onClick={(e) => { e.preventDefault(); scrollTo('about'); setMobileMenuOpen(false); }} className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}>ABOUT</a>
-              <a href="#projects" onClick={(e) => { e.preventDefault(); scrollTo('projects'); setMobileMenuOpen(false); }} className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`}>SHOWCASE</a>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('contact'); setMobileMenuOpen(false); }} className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`}>CONTACT</a>
-              <button 
-                onClick={() => { setTheme('light'); setMobileMenuOpen(false); }} 
-                className="btn-primary"
-                style={{ width: '100%', marginTop: '8px', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-              >
-                <Sun size={14} /> Light Mode
-              </button>
-            </>
-          ) : (
-            <>
-              {navItems.map((item) => (
-                <a
-                  key={item}
-                  href={`#${item}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo(item);
-                  }}
-                  className={`nav-link ${activeSection === item ? 'active' : ''}`}
-                  style={{ textTransform: 'capitalize', padding: '8px 0', fontSize: '16px' }}
-                >
-                  {item}
-                </a>
-              ))}
-              <a 
-                href="mailto:tapasyashrestha9@gmail.com" 
-                className="btn-primary"
-                style={{ width: '100%', marginTop: '8px', fontSize: '12px' }}
-              >
-                tapasyashrestha9@gmail.com
-              </a>
-              <button 
-                onClick={() => { setTheme('dark'); setMobileMenuOpen(false); }} 
-                className="btn-secondary"
-                style={{ width: '100%', marginTop: '8px', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-              >
-                <Moon size={14} /> Dark Mode
-              </button>
-            </>
-          )}
+        <nav className="mobile-nav">
+          {navItems.map((item) => (
+            <a
+              key={item}
+              href={`#${item}`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo(item);
+              }}
+              className={`nav-link ${activeSection === item ? 'active' : ''}`}
+              style={{ textTransform: 'capitalize', padding: '8px 0', fontSize: '16px' }}
+            >
+              {item}
+            </a>
+          ))}
+          <a 
+            href="mailto:tapasyashrestha9@gmail.com" 
+            className="btn-primary"
+            style={{ width: '100%', marginTop: '8px', fontSize: '12px' }}
+          >
+            tapasyashrestha9@gmail.com
+          </a>
         </nav>
       )}
 
       {/* HERO SECTION */}
-      {theme === 'dark' ? (
-        <section id="home" className="hero-section-dark">
-          <div className="container hero-container-dark">
-            <div className="hero-available-tag">
-              <span className="sparkle-icon">✦</span>
-              <span className="tag-text">AVAILABLE FOR WORK</span>
-              <span className="cursor-blink">|</span>
+      <section id="home" className="hero-section">
+        <div className="container">
+          <div className="hero-content-centered">
+            
+            <div className="hero-subtitle-centered">
+              <span>👋, my name is Tapasya and I am a freelance</span>
             </div>
 
-            <div className="hero-title-dark-group">
-              <h1 className="hero-title-dark-white">Fullstack</h1>
-              <h1 className="hero-title-dark-gray">AI/ML Engineer</h1>
-            </div>
-
-            <p className="hero-desc-dark">
-              Building intelligent, full-stack applications with clean, responsive, and elegant interfaces.
-              Turning machine learning algorithms and designs into engaging digital experiences.
-            </p>
-
-            <div className="hero-badges-dark">
-              <span className="badge-dark">React.js</span>
-              <span className="badge-dark">TypeScript</span>
-              <span className="badge-dark">Python</span>
-              <span className="badge-dark">PyTorch</span>
-            </div>
-
-            <div className="hero-actions-dark">
-              <button onClick={() => setShowCard(!showCard)} className="btn-accent-outline">
-                {showCard ? "HIDE CARD" : "SHOW CARD"}
-              </button>
-              <button onClick={() => scrollTo('about')} className="btn-dark-solid">
-                ABOUT ME
-              </button>
-            </div>
-          </div>
-        </section>
-      ) : (
-        <section id="home" className="hero-section">
-          <div className="container">
-            <div className="hero-content-centered">
+            <div className="hero-stack-container">
+              <h1 className="hero-text-row text-solid">FULLSTACK</h1>
               
-              <div className="hero-subtitle-centered">
-                <span>👋, my name is Tapasya and I am a freelance</span>
+              <div className="hero-avatar-wrapper">
+                <img 
+                  src="/avatar.png" 
+                  alt="Tapasya Shrestha" 
+                  className="hero-avatar-img"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/avatar.jpg';
+                  }}
+                />
               </div>
 
-              <div className="hero-stack-container">
-                <h1 className="hero-text-row text-solid">FULLSTACK</h1>
-                
-                <div className="hero-avatar-wrapper">
-                  <img 
-                    src="/avatar.png" 
-                    alt="Tapasya Shrestha" 
-                    className="hero-avatar-img"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/avatar.jpg';
-                    }}
-                  />
-                </div>
-
-                <h1 className="hero-text-row text-outline">&amp; AI/ML</h1>
-                <h1 className="hero-text-row text-outline">ENGINEER</h1>
-              </div>
-
-              <div className="hero-details-row">
-                <div className="hero-details-location">
-                  based in Jaipur, India.
-                </div>
-                <div className="hero-details-logos">
-                  <span className="tech-logo">React</span>
-                  <span className="tech-logo-dot">&bull;</span>
-                  <span className="tech-logo">TypeScript</span>
-                  <span className="tech-logo-dot">&bull;</span>
-                  <span className="tech-logo">Python</span>
-                  <span className="tech-logo-dot">&bull;</span>
-                  <span className="tech-logo">PyTorch</span>
-                  <span className="tech-logo-dot">&bull;</span>
-                  <span className="tech-logo">SQL</span>
-                </div>
-              </div>
-
-              <div className="hero-actions-centered">
-                <button onClick={() => scrollTo('projects')} className="btn-primary-pill">
-                  You need a developer
-                </button>
-                <button onClick={() => scrollTo('contact')} className="btn-secondary-pill">
-                  You need an AI/ML engineer
-                </button>
-              </div>
-
+              <h1 className="hero-text-row text-outline">&amp; AI/ML</h1>
+              <h1 className="hero-text-row text-outline">ENGINEER</h1>
             </div>
+
+            <div className="hero-details-row">
+              <div className="hero-details-location">
+                based in Jaipur, India.
+              </div>
+              <div className="hero-details-logos">
+                <span className="tech-logo">React</span>
+                <span className="tech-logo-dot">&bull;</span>
+                <span className="tech-logo">TypeScript</span>
+                <span className="tech-logo-dot">&bull;</span>
+                <span className="tech-logo">Python</span>
+                <span className="tech-logo-dot">&bull;</span>
+                <span className="tech-logo">PyTorch</span>
+                <span className="tech-logo-dot">&bull;</span>
+                <span className="tech-logo">SQL</span>
+              </div>
+            </div>
+
+            <div className="hero-actions-centered">
+              <button onClick={() => scrollTo('projects')} className="btn-primary-pill">
+                You need a developer
+              </button>
+              <button onClick={() => scrollTo('contact')} className="btn-secondary-pill">
+                You need an AI/ML engineer
+              </button>
+            </div>
+
           </div>
-        </section>
-      )}
+        </div>
+      </section>
+
+      {/* INTRO/SHOWCASE SECTION (Prince-style light theme) */}
+      <section id="intro" className="intro-section-light">
+        <div className="container intro-container-light">
+          <div className="intro-available-tag">
+            <span className="sparkle-icon">✦</span>
+            <span className="tag-text">AVAILABLE FOR WORK</span>
+            <span className="cursor-blink">|</span>
+          </div>
+
+          <div className="intro-title-group">
+            <h1 className="intro-title-black">Fullstack</h1>
+            <h1 className="intro-title-gray">AI/ML Engineer</h1>
+          </div>
+
+          <p className="intro-desc">
+            Building intelligent, full-stack applications with clean, responsive, and elegant interfaces.
+            Turning machine learning algorithms and designs into engaging digital experiences.
+          </p>
+
+          <div className="intro-badges">
+            <span className="badge-light-pill">React.js</span>
+            <span className="badge-light-pill">TypeScript</span>
+            <span className="badge-light-pill">Python</span>
+            <span className="badge-light-pill">PyTorch</span>
+          </div>
+
+          <div className="intro-actions">
+            <button onClick={() => setShowCard(!showCard)} className="btn-accent-outline-light">
+              {showCard ? "HIDE CARD" : "SHOW CARD"}
+            </button>
+            <button onClick={() => scrollTo('about')} className="btn-solid-light">
+              ABOUT ME
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* PROJECTS SECTION */}
       <section id="projects" className="section" style={{ backgroundColor: '#09090c' }}>
