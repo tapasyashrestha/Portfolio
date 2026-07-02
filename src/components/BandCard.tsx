@@ -213,16 +213,16 @@ function Band({
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.onload = () => {
-      const imgWidth = 360;
-      const imgHeight = 440;
+      const imgWidth = 440;
+      const imgHeight = 500;
       const imgX = (canvas.width - imgWidth) / 2;
-      const imgY = 60;
+      const imgY = 50;
 
       // Calculate crop coordinates to center face (she is in the upper right quadrant)
-      const cropWidth = img.width * 0.55; 
-      const cropHeight = cropWidth * (440 / 360); 
-      const sx = img.width * 0.42; 
-      const sy = img.height * 0.18;
+      const cropWidth = img.width * 0.52; 
+      const cropHeight = cropWidth * (500 / 440); 
+      const sx = img.width * 0.46; 
+      const sy = img.height * 0.16;
 
       // Draw photo cropped to focus on face/shoulders
       ctx.drawImage(img, sx, sy, cropWidth, cropHeight, imgX, imgY, imgWidth, imgHeight);
