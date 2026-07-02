@@ -62,8 +62,16 @@ export default function BandCard() {
 
   return (
     <div
-      className="absolute inset-0 w-full h-full"
-      style={{ pointerEvents: "none" }}
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+      }}
     >
       <Suspense fallback={null}>
         <Canvas
