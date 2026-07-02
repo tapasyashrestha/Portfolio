@@ -11,8 +11,7 @@ import {
   BrainCircuit, 
   Server, 
   Database,
-  GraduationCap,
-  Sparkles
+  GraduationCap
 } from 'lucide-react';
 
 const BandCard = lazy(() => import('./components/BandCard'));
@@ -20,7 +19,7 @@ const BandCard = lazy(() => import('./components/BandCard'));
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showCard, setShowCard] = useState(true);
+  const [showCard, setShowCard] = useState(false);
 
 
   // Monitor scrolling to highlight navigation links
@@ -457,15 +456,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Floating 3D Card Toggle Button */}
-      <button 
-        onClick={() => setShowCard(!showCard)} 
-        className="floating-card-toggle"
-        title={showCard ? "Hide 3D Card" : "Show 3D Card"}
-        aria-label="Toggle 3D Card"
-      >
-        <Sparkles size={20} />
-      </button>
+
 
       {/* 3D ID Card Floating */}
       <AnimatePresence>
