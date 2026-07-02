@@ -1348,13 +1348,13 @@ a {
 
 .intro-card-canvas-container {
   width: 100%;
-  height: 520px;
+  height: 600px;
   position: relative;
 }
 
 @media (max-width: 767px) {
   .intro-card-canvas-container {
-    height: 420px;
+    height: 480px;
   }
 }
 
