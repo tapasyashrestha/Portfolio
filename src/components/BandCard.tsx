@@ -240,12 +240,12 @@ function Band({
     };
 
     img.onerror = () => {
-      if (img.src.endsWith(".png")) {
-        img.src = "/avatar.jpg";
+      if (img.src.endsWith(".jpg")) {
+        img.src = "/avatar.png";
       }
     };
 
-    img.src = "/avatar.png";
+    img.src = "/avatar_card.jpg";
   }, []);
 
   const [curve] = useState(
