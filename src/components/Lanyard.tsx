@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
@@ -11,11 +11,6 @@ extend({ MeshLineGeometry, MeshLineMaterial });
 
 const cardGLB = "/assets/cards.glb";
 const lanyard = "/assets/new.png";
-
-// 1x1 transparent pixel — lets useTexture be called unconditionally when a
-// front/back image isn't supplied.
-const BLANK_PIXEL =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
 
 // The card model's front face is UV-mapped to the LEFT half of the texture
 // atlas and the back face to the RIGHT half (measured from card.glb). Each
@@ -146,92 +141,125 @@ function Band({
   const nodes = gltf?.nodes || {};
   const materials = gltf?.materials || {};
   const texture = useTexture(lanyardImage || lanyard);
-  // useTexture must be called unconditionally; use a blank pixel when an image
-  // isn't supplied for a given face, then skip compositing it below.
-  const frontTex = useTexture(frontImage || BLANK_PIXEL);
-  const backTex = useTexture(backImage || BLANK_PIXEL);
+  const [cardTexture, setCardTexture] = useState<THREE.CanvasTexture | null>(null);
 
-  // Composite the front/back images into the card's texture atlas (front = left
-  // half, back = right half). Each image is drawn aspect-preserving (no stretch).
-  const cardMap = useMemo(() => {
+  useEffect(() => {
     const baseMap = materials.base?.map;
-    if (!baseMap) return null;
-    if (!frontImage && !backImage) return baseMap;
+    const baseImg = baseMap?.image;
 
-    const baseImg = baseMap.image;
-    if (!baseImg) return baseMap;
-    const W = baseImg.width || 512;
-    const H = baseImg.height || 728;
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
+    const W = baseImg?.width || 512;
+    const H = baseImg?.height || 728;
     canvas.width = W;
     canvas.height = H;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return baseMap;
-    // Keep the original baked atlas for the card edges and any untouched face.
-    ctx.drawImage(baseImg, 0, 0, W, H);
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    const drawFitted = (img: HTMLImageElement, rect: typeof FRONT_UV_RECT, isFront: boolean) => {
-      const rx = rect.x * W;
-      const ry = rect.y * H;
-      const rw = rect.w * W;
-      const rh = rect.h * H;
+    // Fill background with white
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Special customization for Tapasya's avatar ID card face!
-      if (isFront && frontImage === '/avatar_card.jpg') {
-        // Fill white card background
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(rx, ry, rw, rh);
-
-        // Photo coordinates inside card rect
-        const imgWidth = rw * 0.86;
-        const imgHeight = rh * 0.68;
-        const imgX = rx + (rw - imgWidth) / 2;
-        const imgY = ry + (rh * 0.08);
-
-        // Crop coordinates to focus on Tapasya's face (upper-right quadrant of raw photo)
-        const cropWidth = img.width * 0.52;
-        const cropHeight = cropWidth * (imgHeight / imgWidth);
-        const sx = img.width * 0.46;
-        const sy = img.height * 0.16;
-
-        ctx.drawImage(img, sx, sy, cropWidth, cropHeight, imgX, imgY, imgWidth, imgHeight);
-
-        // Photo border
-        ctx.strokeStyle = '#cbd5e1';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(imgX - 1, imgY - 1, imgWidth + 2, imgHeight + 2);
-
-        // Name text
-        ctx.fillStyle = '#000000';
-        ctx.textAlign = 'center';
-        ctx.font = 'italic 20px "Brush Script MT", "Georgia", cursive';
-        ctx.fillText("Name - Tapasya Shrestha", rx + rw / 2, ry + rh * 0.86);
-      } else {
-        const pick = imageFit === 'contain' ? Math.min : Math.max;
-        const scale = pick(rw / img.width, rh / img.height);
-        const dw = img.width * scale;
-        const dh = img.height * scale;
-        const dx = rx + (rw - dw) / 2;
-        const dy = ry + (rh - dh) / 2;
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(rx, ry, rw, rh);
-        ctx.clip();
-        ctx.drawImage(img, dx, dy, dw, dh);
-        ctx.restore();
+    // Draw base map if loaded
+    if (baseImg) {
+      try {
+        ctx.drawImage(baseImg, 0, 0, W, H);
+      } catch (e) {
+        console.warn("Failed to draw base map, using fallback:", e);
       }
-    };
+    }
 
-    if (frontImage && frontTex?.image) drawFitted(frontTex.image as any, FRONT_UV_RECT, true);
-    if (backImage && backTex?.image) drawFitted(backTex.image as any, BACK_UV_RECT, false);
+    let loadedCount = 0;
+    const targets: Array<{ url: string; isFront: boolean }> = [];
+    if (frontImage) targets.push({ url: frontImage, isFront: true });
+    if (backImage) targets.push({ url: backImage, isFront: false });
 
-    const composite = new THREE.CanvasTexture(canvas);
-    composite.colorSpace = THREE.SRGBColorSpace;
-    composite.flipY = baseMap.flipY;
-    composite.anisotropy = 16;
-    composite.needsUpdate = true;
-    return composite;
-  }, [frontImage, backImage, imageFit, frontTex, backTex, materials.base?.map]);
+    if (targets.length === 0) {
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.flipY = baseMap?.flipY !== undefined ? baseMap.flipY : false;
+      setCardTexture(tex);
+      return;
+    }
+
+    targets.forEach(({ url, isFront }) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        const rect = isFront ? FRONT_UV_RECT : BACK_UV_RECT;
+        const rx = rect.x * W;
+        const ry = rect.y * H;
+        const rw = rect.w * W;
+        const rh = rect.h * H;
+
+        if (isFront && frontImage === '/avatar_card.jpg') {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(rx, ry, rw, rh);
+
+          const imgWidth = rw * 0.86;
+          const imgHeight = rh * 0.68;
+          const imgX = rx + (rw - imgWidth) / 2;
+          const imgY = ry + (rh * 0.08);
+
+          const cropWidth = img.width * 0.52;
+          const cropHeight = cropWidth * (imgHeight / imgWidth);
+          const sx = img.width * 0.46;
+          const sy = img.height * 0.16;
+
+          ctx.drawImage(img, sx, sy, cropWidth, cropHeight, imgX, imgY, imgWidth, imgHeight);
+
+          ctx.strokeStyle = '#cbd5e1';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(imgX - 1, imgY - 1, imgWidth + 2, imgHeight + 2);
+
+          ctx.fillStyle = '#000000';
+          ctx.textAlign = 'center';
+          ctx.font = 'italic 20px "Brush Script MT", "Georgia", cursive';
+          ctx.fillText("Name - Tapasya Shrestha", rx + rw / 2, ry + rh * 0.86);
+        } else {
+          const pick = imageFit === 'contain' ? Math.min : Math.max;
+          const scale = pick(rw / img.width, rh / img.height);
+          const dw = img.width * scale;
+          const dh = img.height * scale;
+          const dx = rx + (rw - dw) / 2;
+          const dy = ry + (rh - dh) / 2;
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(rx, ry, rw, rh);
+          ctx.clip();
+          ctx.drawImage(img, dx, dy, dw, dh);
+          ctx.restore();
+        }
+
+        loadedCount++;
+        if (loadedCount === targets.length) {
+          const tex = new THREE.CanvasTexture(canvas);
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.flipY = baseMap?.flipY !== undefined ? baseMap.flipY : false;
+          tex.anisotropy = 16;
+          tex.needsUpdate = true;
+          setCardTexture(tex);
+        }
+      };
+
+      img.onerror = () => {
+        if (isFront && url === '/avatar_card.jpg') {
+          img.src = '/avatar.png';
+        } else {
+          loadedCount++;
+          if (loadedCount === targets.length) {
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.colorSpace = THREE.SRGBColorSpace;
+            tex.flipY = baseMap?.flipY !== undefined ? baseMap.flipY : false;
+            tex.anisotropy = 16;
+            tex.needsUpdate = true;
+            setCardTexture(tex);
+          }
+        }
+      };
+
+      img.src = url;
+    });
+  }, [frontImage, backImage, imageFit, materials.base?.map]);
 
   const [curve] = useState(
     () =>
@@ -322,7 +350,7 @@ function Band({
             {nodes?.card?.geometry && (
               <mesh geometry={nodes.card.geometry}>
                 <meshPhysicalMaterial
-                  map={cardMap}
+                  map={cardTexture || materials.base?.map}
                   map-anisotropy={16}
                   clearcoat={isMobile ? 0 : 1}
                   clearcoatRoughness={0.15}
