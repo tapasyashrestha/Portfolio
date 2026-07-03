@@ -169,7 +169,6 @@ export default function App() {
                 {item === 'about' ? 'education & experience' : item}
               </a>
             ))}
-            <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--muted)', margin: '0 4px', textDecoration: 'underline' }}>EN</span>
             <a
               href="/Tapasya_Shrestha_Resume.pdf"
               download="Tapasya_Shrestha_Resume.pdf"
