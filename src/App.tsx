@@ -370,7 +370,7 @@ export default function App() {
                   {showCard ? "HIDE CARD" : "SHOW CARD"}
                 </button>
                 <button onClick={() => setShowAboutModal(true)} className="btn-solid-light">
-                  Education & Experience
+                  About Me
                 </button>
               </div>
             </div>
