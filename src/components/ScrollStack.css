@@ -1,0 +1,46 @@
+.scroll-stack-scroller {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow-y: visible;
+  overflow-x: visible;
+}
+
+.scroll-stack-inner {
+  padding: 5vh 0 10vh; /* Premium tight padding for inline scroll stack */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.scroll-stack-card {
+  transform-origin: top center;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  min-height: 22rem;
+  height: auto;
+  width: 100%;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-sizing: border-box;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  position: relative;
+  margin-bottom: 0 !important; /* Controlled by itemDistance margin-bottom script */
+}
+
+/* Ensure padding matches glow-card styling precisely */
+.scroll-stack-card.glow-card {
+  padding: 32px;
+}
+
+.scroll-stack-end {
+  width: 100%;
+  height: 1px;
+}
