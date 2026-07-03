@@ -326,8 +326,21 @@ export default function App() {
       </div>
 
       {/* INTRO/SHOWCASE SECTION (Prince-style light theme) */}
-      <section id="intro" className="intro-section-light">
-        <div className="container intro-container-light">
+      <section id="intro" className="intro-section-light" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.85 }}>
+          <DotField
+            dotRadius={2.2}
+            dotSpacing={14}
+            bulgeStrength={60}
+            glowRadius={180}
+            sparkle={false}
+            waveAmplitude={0.4}
+            gradientFrom="rgba(11, 11, 12, 0.35)"
+            gradientTo="rgba(11, 11, 12, 0.20)"
+            glowColor="rgba(0, 0, 0, 0.04)"
+          />
+        </div>
+        <div className="container intro-container-light" style={{ position: 'relative', zIndex: 1 }}>
           <div className="intro-content-wrapper">
             <div className="intro-left-col">
               <div className="intro-available-tag">
@@ -448,8 +461,21 @@ export default function App() {
       </section>
 
       {/* SKILLS SECTION */}
-      <section id="skills" className="section">
-        <div className="container">
+      <section id="skills" className="section" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.85 }}>
+          <DotField
+            dotRadius={2.2}
+            dotSpacing={14}
+            bulgeStrength={60}
+            glowRadius={180}
+            sparkle={false}
+            waveAmplitude={0.4}
+            gradientFrom="rgba(11, 11, 12, 0.35)"
+            gradientTo="rgba(11, 11, 12, 0.20)"
+            glowColor="rgba(0, 0, 0, 0.04)"
+          />
+        </div>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="skills-title-wrapper">
             <TextPressure
               text="TECHNICAL SKILLS"
@@ -576,8 +602,21 @@ export default function App() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="section">
-        <div className="container">
+      <section id="contact" className="section" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.85 }}>
+          <DotField
+            dotRadius={2.2}
+            dotSpacing={14}
+            bulgeStrength={60}
+            glowRadius={180}
+            sparkle={false}
+            waveAmplitude={0.4}
+            gradientFrom="rgba(11, 11, 12, 0.35)"
+            gradientTo="rgba(11, 11, 12, 0.20)"
+            glowColor="rgba(0, 0, 0, 0.04)"
+          />
+        </div>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="section-header" ref={contactContainerRef} style={{ justifyContent: 'center', flexDirection: 'column', gap: '12px' }}>
             <h2 className="section-title" style={{ fontSize: '42px', textTransform: 'none', display: 'inline-block', textAlign: 'center', margin: '0 auto' }}>
               <VariableProximity
