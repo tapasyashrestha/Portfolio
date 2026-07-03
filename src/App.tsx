@@ -162,7 +162,7 @@ export default function App() {
                 className={`nav-link ${activeSection === item ? 'active' : ''}`}
                 style={{ textTransform: 'capitalize' }}
               >
-                {item}
+                {item === 'about' ? 'education & experience' : item}
               </a>
             ))}
             <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--muted)', margin: '0 4px', textDecoration: 'underline' }}>EN</span>
@@ -199,7 +199,7 @@ export default function App() {
               className={`nav-link ${activeSection === item ? 'active' : ''}`}
               style={{ textTransform: 'capitalize', padding: '8px 0', fontSize: '16px' }}
             >
-              {item}
+              {item === 'about' ? 'education & experience' : item}
             </a>
           ))}
           <a
@@ -459,7 +459,7 @@ export default function App() {
       <section id="about" className="section section-dark">
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">About <span>Me</span></h2>
+            <h2 className="section-title">Education & <span>Experience</span></h2>
             <div className="section-line"></div>
           </div>
 
