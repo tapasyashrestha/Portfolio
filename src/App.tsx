@@ -20,6 +20,7 @@ import TechSphere from './components/TechSphere';
 import TextPressure from './components/TextPressure';
 import ScrollStack, { ScrollStackItem } from './components/ScrollStack';
 import VariableProximity from './components/VariableProximity';
+import DotField from './components/DotField';
 
 const projectItems = [
   { image: '/sehai_project.png', text: 'SEHAI' },
@@ -217,8 +218,21 @@ export default function App() {
       )}
 
       {/* HERO SECTION */}
-      <section id="home" className="hero-section">
-        <div className="container">
+      <section id="home" className="hero-section" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.85 }}>
+          <DotField
+            dotRadius={1.5}
+            dotSpacing={16}
+            bulgeStrength={50}
+            glowRadius={150}
+            sparkle={false}
+            waveAmplitude={0.3}
+            gradientFrom="rgba(0, 0, 0, 0.16)"
+            gradientTo="rgba(0, 0, 0, 0.08)"
+            glowColor="rgba(0, 0, 0, 0.03)"
+          />
+        </div>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="hero-content-centered">
 
             <div className="hero-subtitle-centered">
