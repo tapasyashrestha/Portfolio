@@ -607,10 +607,10 @@ export default function App() {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '48px' }}>
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="outline-icon-button" aria-label="GitHub">
+              <a href="https://github.com/tapasyashrestha" target="_blank" rel="noreferrer" className="outline-icon-button" aria-label="GitHub">
                 <Github size={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="outline-icon-button" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/tapasya-shrestha-8b37b9320/" target="_blank" rel="noreferrer" className="outline-icon-button" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
             </div>
