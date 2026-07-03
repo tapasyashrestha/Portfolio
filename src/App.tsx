@@ -14,7 +14,7 @@ import {
   Briefcase
 } from 'lucide-react';
 
-const BandCard = lazy(() => import('./components/BandCard'));
+const Lanyard = lazy(() => import('./components/Lanyard'));
 import CircularGallery from './components/CircularGallery';
 import TechSphere from './components/TechSphere';
 import TextPressure from './components/TextPressure';
@@ -278,7 +278,7 @@ export default function App() {
                 See my work
               </button>
               <button onClick={() => scrollTo('contact')} className="btn-secondary-pill">
-                Hire me
+                Let's Connect
               </button>
             </div>
 
@@ -385,7 +385,14 @@ export default function App() {
                     className="intro-card-canvas-container"
                   >
                     <Suspense fallback={<div className="loading-spinner-inline">Loading 3D Card...</div>}>
-                      <BandCard />
+                      <Lanyard
+                        position={[0, 0, 20]}
+                        gravity={[0, -40, 0]}
+                        frontImage="/avatar_card.jpg"
+                        imageFit="cover"
+                        lanyardImage="/assets/new.png"
+                        lanyardWidth={1}
+                      />
                     </Suspense>
                   </motion.div>
                 )}
