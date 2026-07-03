@@ -713,7 +713,7 @@ a {
 
 /* Footer styling */
 .footer {
-  padding: 40px 0;
+  padding: 20px 0;
   border-top: 1px solid var(--border);
   background-color: #fafafa;
   text-align: center;
