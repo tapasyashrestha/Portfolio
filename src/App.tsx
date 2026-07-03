@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Github,
@@ -19,6 +19,7 @@ import CircularGallery from './components/CircularGallery';
 import TechSphere from './components/TechSphere';
 import TextPressure from './components/TextPressure';
 import ScrollStack, { ScrollStackItem } from './components/ScrollStack';
+import VariableProximity from './components/VariableProximity';
 
 const projectItems = [
   { image: '/sehai_project.png', text: 'SEHAI' },
@@ -31,7 +32,7 @@ const projectsData = [
     id: 0,
     title: "SEHAI – AI rural healthcare helper",
     category: "Rural Healthcare Assistant / AI Voice Assistant",
-    github: "https://github.com",
+    github: "https://github.com/tapasyashrestha/Sehai",
     tech: ["React.js", "TypeScript", "Tailwind CSS", "Vite", "React Router", "XGBoost", "Python"],
     bullets: [
       "Developed a voice-enabled healthcare platform to assist ANMs (Auxiliary Nurse Midwives) in recording patient symptoms and managing rural healthcare workflows.",
@@ -44,7 +45,7 @@ const projectsData = [
     id: 1,
     title: "Vakeel – Multi-Tenant Legal Tech Platform for Indian Advocate Chambers",
     category: "B2B Legal Tech Platform",
-    github: "https://github.com",
+    github: "https://github.com/tapasyashrestha/Vakeel",
     tech: ["Firebase Auth", "Firestore", "Firebase Storage", "FastAPI", "React", "OpenAI Embeddings", "Indian Kanoon API"],
     bullets: [
       "Designing a B2B legal tech platform enabling advocate chambers to manage drafting, case research, and document workflows with verified, source-traceable outputs rather than raw generative speed.",
@@ -57,7 +58,7 @@ const projectsData = [
     id: 2,
     title: "Tarang (RippleIQ) – AI-Powered Decision Intelligence Platform for E-commerce",
     category: "AI-Powered Decision Intelligence Platform",
-    github: "https://github.com",
+    github: "https://github.com/tapasyashrestha/Tarang-Nexora",
     tech: ["React", "Tailwind CSS", "Recharts", "FastAPI", "Scikit-learn", "XGBoost", "Pandas", "PostgreSQL"],
     bullets: [
       "Built a decision intelligence platform that simulates the ripple effects of business decisions (price, inventory, marketing spend) on sales, revenue, delivery performance, and customer satisfaction before implementation.",
@@ -74,6 +75,8 @@ export default function App() {
   const [showCard, setShowCard] = useState(false);
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+
+  const contactContainerRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -561,9 +564,18 @@ export default function App() {
       {/* CONTACT SECTION */}
       <section id="contact" className="section">
         <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">Get <span>In Touch</span></h2>
-            <div className="section-line"></div>
+          <div className="section-header" ref={contactContainerRef} style={{ justifyContent: 'center', flexDirection: 'column', gap: '12px' }}>
+            <h2 className="section-title" style={{ fontSize: '42px', textTransform: 'none', display: 'inline-block', textAlign: 'center', margin: '0 auto' }}>
+              <VariableProximity
+                label="Let's Connect"
+                fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                toFontVariationSettings="'wght' 900, 'opsz' 40"
+                containerRef={contactContainerRef}
+                radius={120}
+                falloff="linear"
+              />
+            </h2>
+            <div className="section-line" style={{ flexGrow: 0, width: '80px', height: '2px', backgroundColor: 'var(--accent-light, #10b981)', margin: '0 auto' }}></div>
           </div>
 
           <div className="contact-container">
