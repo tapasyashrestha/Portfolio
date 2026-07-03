@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Github,
@@ -14,7 +14,7 @@ import {
   Briefcase
 } from 'lucide-react';
 
-const Lanyard = lazy(() => import('./components/Lanyard'));
+
 import CircularGallery from './components/CircularGallery';
 import TechSphere from './components/TechSphere';
 import TextPressure from './components/TextPressure';
@@ -23,9 +23,9 @@ import VariableProximity from './components/VariableProximity';
 import DotField from './components/DotField';
 
 const projectItems = [
-  { image: '/sehai_project.png', text: 'SEHAI' },
-  { image: '/vakeel_project.png', text: 'Vakeel' },
-  { image: '/tarang_project.png', text: 'Tarang ' }
+  { image: '/Sehai.jpg', text: 'SEHAI' },
+  { image: '/Vakeel.jpg', text: 'Vakeel' },
+  { image: '/Tarang.jpg', text: 'Tarang ' }
 ];
 
 const projectsData = [
@@ -73,7 +73,7 @@ const projectsData = [
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showCard, setShowCard] = useState(false);
+
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
 
@@ -365,41 +365,15 @@ export default function App() {
               </div>
 
               <div className="intro-actions">
-                <button onClick={() => setShowCard(!showCard)} className="btn-accent-outline-light">
-                  {showCard ? "HIDE CARD" : "SHOW CARD"}
-                </button>
                 <button onClick={() => setShowAboutModal(true)} className="btn-solid-light">
                   About Me
                 </button>
               </div>
-            </div>
 
-            <div className="intro-right-col">
-              <AnimatePresence>
-                {showCard && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: -40 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: -40 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="intro-card-canvas-container"
-                  >
-                    <Suspense fallback={<div className="loading-spinner-inline">Loading 3D Card...</div>}>
-                      <Lanyard
-                        position={[0, 0, 20]}
-                        gravity={[0, -40, 0]}
-                        frontImage="/avatar_card.jpg"
-                        imageFit="cover"
-                        lanyardImage="/assets/new.png"
-                        lanyardWidth={1}
-                      />
-                    </Suspense>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
           </div>
         </div>
+
       </section>
 
       {/* PROJECTS SECTION */}
