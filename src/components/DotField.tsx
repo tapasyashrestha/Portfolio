@@ -61,7 +61,8 @@ const DotField = memo(({
   useEffect(() => {
     const canvas = canvasRef.current;
     const glowEl = glowRef.current;
-    if (!canvas) return;
+    if (!canvas || !canvas.parentElement) return;
+    const parent = canvas.parentElement;
     const ctx = canvas.getContext('2d', { alpha: true }) as CanvasRenderingContext2D;
     if (!ctx) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -73,10 +74,11 @@ const DotField = memo(({
     }
 
     function doResize() {
-      if (!canvas || !canvas.parentElement) return;
-      const rect = canvas.parentElement.getBoundingClientRect();
+      if (!canvas || !parent) return;
+      const rect = parent.getBoundingClientRect();
       const w = rect.width;
       const h = rect.height;
+      if (w === 0 || h === 0) return;
 
       canvas.width = w * dpr;
       canvas.height = h * dpr;
@@ -120,6 +122,11 @@ const DotField = memo(({
       mouseRef.current.y = e.pageY - s.offsetY;
     }
 
+    function onMouseLeave() {
+      mouseRef.current.x = -9999;
+      mouseRef.current.y = -9999;
+    }
+
     function updateMouseSpeed() {
       const m = mouseRef.current;
       const dx = m.prevX - m.x;
@@ -144,7 +151,7 @@ const DotField = memo(({
       const len = dots.length;
       const t = frameCount * 0.02;
 
-      const targetEngagement = Math.min(m.speed / 5, 1);
+      const targetEngagement = m.x !== -9999 ? 0.75 + Math.min(m.speed / 5, 0.25) : 0;
       engagement.current += (targetEngagement - engagement.current) * 0.06;
       if (engagement.current < 0.001) engagement.current = 0;
       const eng = engagement.current;
@@ -234,8 +241,14 @@ const DotField = memo(({
     }
 
     doResize();
+    const resizeObserver = new ResizeObserver(() => {
+      doResize();
+    });
+    resizeObserver.observe(parent);
+
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.addEventListener('mouseleave', onMouseLeave);
     rafRef.current = requestAnimationFrame(tick);
 
     rebuildRef.current = () => {
@@ -244,11 +257,13 @@ const DotField = memo(({
     };
 
     return () => {
+      resizeObserver.disconnect();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       clearInterval(speedInterval);
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeave);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
