@@ -59,7 +59,7 @@ const projectsData = [
     id: 2,
     title: "Tarang (RippleIQ) – AI-Powered Decision Intelligence Platform for E-commerce",
     category: "AI-Powered Decision Intelligence Platform",
-    github: "https://github.com/tapasyashrestha/Tarang-Nexora",
+    github: "https://github.com/tapasyashrestha/Tarang",
     tech: ["React", "Tailwind CSS", "Recharts", "FastAPI", "Scikit-learn", "XGBoost", "Pandas", "PostgreSQL"],
     bullets: [
       "Built a decision intelligence platform that simulates the ripple effects of business decisions (price, inventory, marketing spend) on sales, revenue, delivery performance, and customer satisfaction before implementation.",
@@ -302,7 +302,7 @@ export default function App() {
             <span className="ticker-dot">✦</span>
             <span className="ticker-item">FastAPI</span>
             <span className="ticker-dot">✦</span>
-            
+
           </div>
           <div className="ticker-item-group" aria-hidden="true">
             <span className="ticker-item">Tapasya Shrestha</span>
