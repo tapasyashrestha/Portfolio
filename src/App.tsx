@@ -320,7 +320,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* INTRO/SHOWCASE SECTION (Prince-style light theme) */}
+
       <section id="intro" className="intro-section-light" style={{ position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.85 }}>
           <DotField

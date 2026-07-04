@@ -4,15 +4,21 @@
 @import './components/DotField.css';
 
 :root {
-  --background: #fcfcfc; /* Clean off-white background matching the reference */
-  --foreground: #0b0b0c; /* High-contrast black text */
-  --primary: #000000;    /* Solid black */
+  --background: #fcfcfc;
+  /* Clean off-white background matching the reference */
+  --foreground: #0b0b0c;
+  /* High-contrast black text */
+  --primary: #000000;
+  /* Solid black */
   --primary-rgb: 0, 0, 0;
-  --secondary: #ffffff;  /* Solid white */
-  --card: #ffffff;       /* Pure white cards */
+  --secondary: #ffffff;
+  /* Solid white */
+  --card: #ffffff;
+  /* Pure white cards */
   --card-border: rgba(0, 0, 0, 0.06);
   --border: rgba(0, 0, 0, 0.08);
-  --muted: #5e6b7c;      /* Muted charcoal text */
+  --muted: #5e6b7c;
+  /* Muted charcoal text */
   --muted-light: rgba(94, 107, 124, 0.05);
   --font-sans: 'Inter', sans-serif;
   --font-heading: 'Outfit', sans-serif;
@@ -43,19 +49,27 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--background);
 }
+
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--foreground);
 }
 
 /* Typography & Layout Utilities */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -137,7 +151,8 @@ a {
   transition: color 0.3s ease;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--foreground);
 }
 
@@ -1146,8 +1161,7 @@ a {
   color: var(--muted);
 }
 
-/* Global Dark Mode variables */
-/* Intro/Showcase Section (Prince-style light theme) */
+
 .intro-section-light {
   min-height: 100vh;
   display: flex;
@@ -1192,8 +1206,15 @@ a {
 }
 
 @keyframes blink {
-  from, to { color: transparent }
-  50% { color: #f97316 }
+
+  from,
+  to {
+    color: transparent
+  }
+
+  50% {
+    color: #f97316
+  }
 }
 
 .intro-title-group {
@@ -1226,13 +1247,17 @@ a {
 }
 
 @media (min-width: 768px) {
-  .intro-title-black, .intro-title-gray {
+
+  .intro-title-black,
+  .intro-title-gray {
     font-size: 5.2rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .intro-title-black, .intro-title-gray {
+
+  .intro-title-black,
+  .intro-title-gray {
     font-size: 6.8rem;
   }
 }
@@ -1450,12 +1475,12 @@ a {
   .about-modal-overlay {
     padding: 100px 16px 40px;
   }
-  
+
   .about-modal-back-btn {
     top: 24px;
     left: 16px;
   }
-  
+
   .about-modal-container {
     padding: 40px 24px;
     gap: 32px;
@@ -1488,8 +1513,15 @@ a {
 }
 
 @keyframes blink {
-  from, to { color: transparent }
-  50% { color: #ffffff }
+
+  from,
+  to {
+    color: transparent
+  }
+
+  50% {
+    color: #ffffff
+  }
 }
 
 .about-modal-text-container {
@@ -1594,6 +1626,7 @@ a {
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(-100%, 0, 0);
   }
@@ -1603,6 +1636,7 @@ a {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -1852,21 +1886,17 @@ a {
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.3s ease;
-  background: radial-gradient(
-    400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(0, 0, 0, 0.03),
-    transparent 50%
-  );
+  background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(0, 0, 0, 0.03),
+      transparent 50%);
   z-index: 1;
   pointer-events: none;
 }
 
 .section-dark .glow-card::after {
-  background: radial-gradient(
-    400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(255, 255, 255, 0.06),
-    transparent 50%
-  ) !important;
+  background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(255, 255, 255, 0.06),
+      transparent 50%) !important;
 }
 
 .glow-card:hover::after {
@@ -1913,22 +1943,28 @@ a {
   .contact-section-title {
     font-size: 28px;
   }
+
   .project-card {
     padding: 20px;
   }
+
   .projects-gallery-column {
     height: 320px;
   }
+
   .scroll-stack-card.glow-card {
     padding: 20px;
   }
+
   .section-title {
     font-size: 24px;
   }
 }
 
 @media (max-width: 480px) {
-  .btn-primary, .btn-secondary {
+
+  .btn-primary,
+  .btn-secondary {
     padding: 12px 20px !important;
     font-size: 10.5px !important;
   }
@@ -1938,9 +1974,8 @@ a {
   .hero-avatar-wrapper {
     top: 122%;
   }
+
   .hero-stack-container {
     margin-bottom: 180px;
   }
 }
-
-
