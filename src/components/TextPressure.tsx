@@ -109,7 +109,7 @@ export default function TextPressure({
 
     const { width: containerW, height: containerH } = containerRef.current.getBoundingClientRect();
 
-    let newFontSize = containerW / (chars.length / 2);
+    let newFontSize = containerW / (chars.length * 0.65);
     newFontSize = Math.max(newFontSize, minFontSize);
 
     setFontSize(newFontSize);
@@ -220,7 +220,8 @@ export default function TextPressure({
         position: 'relative',
         width: '100%',
         height: '100%',
-        background: 'transparent'
+        background: 'transparent',
+        overflow: 'hidden'
       }}
     >
       {styleElement}

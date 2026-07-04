@@ -408,7 +408,7 @@ export default function App() {
                       transition={{ duration: 0.3 }}
                       className="glow-card project-card active-details-card"
                       onMouseMove={handleMouseMove}
-                      style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '32px' }}
+                      style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
                     >
                       <div>
                         <div className="project-top">
@@ -498,12 +498,12 @@ export default function App() {
                     <h3 className="education-title" style={{ fontSize: '24px' }}>B.Tech in Computer Science and Engineering</h3>
                   </div>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '20px', marginTop: '10px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '20px', marginTop: '10px', flexWrap: 'wrap', gap: '12px' }}>
                   <div>
                     <p style={{ color: '#94a3b8', fontFamily: 'var(--font-mono)', fontSize: '12px', textTransform: 'uppercase' }}>Status</p>
                     <p className="education-status" style={{ fontSize: '18px', fontWeight: 600, color: '#f1f5f9', marginTop: '4px' }}>Currently: 3rd Year</p>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
+                  <div>
                     <p style={{ color: '#94a3b8', fontFamily: 'var(--font-mono)', fontSize: '12px', textTransform: 'uppercase' }}>Graduation</p>
                     <p style={{ fontSize: '18px', fontWeight: 600, color: '#f1f5f9', marginTop: '4px' }}>Class of 2028</p>
                   </div>
@@ -598,7 +598,7 @@ export default function App() {
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="section-header" ref={contactContainerRef} style={{ justifyContent: 'center', flexDirection: 'column', gap: '12px' }}>
-            <h2 className="section-title" style={{ fontSize: '42px', textTransform: 'none', display: 'inline-block', textAlign: 'center', margin: '0 auto' }}>
+            <h2 className="section-title contact-section-title" style={{ display: 'inline-block', textAlign: 'center', margin: '0 auto' }}>
               <VariableProximity
                 label="Let's Connect"
                 fromFontVariationSettings="'wght' 400, 'opsz' 9"
