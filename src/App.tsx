@@ -296,14 +296,13 @@ export default function App() {
             <span className="ticker-dot">✦</span>
             <span className="ticker-item"><span className="accent">AI/ML Engineer</span></span>
             <span className="ticker-dot">✦</span>
-            <span className="ticker-item">React &amp; TS</span>
+            <span className="ticker-item">React &amp; SQL</span>
             <span className="ticker-dot">✦</span>
             <span className="ticker-item">Python &amp; PyTorch</span>
             <span className="ticker-dot">✦</span>
             <span className="ticker-item">FastAPI</span>
             <span className="ticker-dot">✦</span>
-            <span className="ticker-item">SQL</span>
-            <span className="ticker-dot">✦</span>
+            
           </div>
           <div className="ticker-item-group" aria-hidden="true">
             <span className="ticker-item">Tapasya Shrestha</span>
